@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const bookController = require('../controllers/bookController');
+const limiter = require('../middlewares/limiter');
 
-router.get('/', bookController.getAllBooks);
-router.get('/:id', bookController.getBookById);
-router.post('/', bookController.addBook);
-router.put('/:id', bookController.updateBook);
-router.delete('/:id', bookController.deleteBook);
+router.get('/', limiter(5000), bookController.getAllBooks);
+router.get('/:id', limiter(5000), bookController.getBookById);
+router.post('/', limiter(5000), bookController.addBook);
+router.put('/:id', limiter(5000), bookController.updateBook);
+router.delete('/:id', limiter(5000), bookController.deleteBook);
 
 module.exports = router;
