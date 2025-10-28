@@ -10,8 +10,8 @@ const SPANS = {
 
 const limiter = (max, span = 'FIFTEEN_MINUTES') => rateLimit({
     windowMs: SPANS?.[span] || SPANS.FIFTEEN_MINUTES,
-    max: max,
-    message: "Trop de requêtes provenant de cette IP, veuillez réessayer plus tard."
+    max,
+    message: "<img src='https://media1.tenor.com/m/iOoe4V8Va6YAAAAC/well-yes-but-actually-no-meme.gif' />",
 });
 
 module.exports = limiter;
