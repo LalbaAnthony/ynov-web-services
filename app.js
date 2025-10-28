@@ -8,4 +8,10 @@ app.use(express.json());
 const booksRoutes = require('./routes/booksRoutes');
 app.use('/api/books', booksRoutes);
 
+
+// Handle unhandled routes
+app.use((req, res, next) => {
+    res.status(404).json({ message: 'Route not found' });
+})
+
 module.exports = app;
