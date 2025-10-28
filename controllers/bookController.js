@@ -1,13 +1,13 @@
-const BookService = require('../services/bookService');
+const BookProxy = require('../proxies/bookProxy');
 
 function getAllBooks(req, res) {
-    const books = BookService.getAllBooks();
+    const books = BookProxy.getAll();
     res.json(books);
 }
 
 function getBookById(req, res) {
     const id = parseInt(req.params.id);
-    const book = BookService.getBookById(id);
+    const book = BookProxy.getById(id);
 
     if (!book) {
         return res.status(404).json({ message: "Livre non trouvé" });
@@ -23,7 +23,7 @@ function addBook(req, res) {
         return res.status(400).json({ message: "Titre et auteur sont requis." });
     }
 
-    const newBook = BookService.addBook(title, author);
+    const newBook = BookProxy.add(title, author);
     res.status(201).json(newBook);
 }
 
@@ -35,7 +35,7 @@ function updateBook(req, res) {
         return res.status(400).json({ message: "Titre et auteur sont requis." });
     }
 
-    const updated = BookService.updateBook(id, title, author);
+    const updated = BookProxy.update(id, title, author);
 
     if (!updated) {
         return res.status(404).json({ message: "Livre non trouvé" });
@@ -46,7 +46,7 @@ function updateBook(req, res) {
 
 function deleteBook(req, res) {
     const id = parseInt(req.params.id);
-    const deleted = BookService.deleteBook(id);
+    const deleted = BookProxy.destroy(id);
 
     if (!deleted) {
         return res.status(404).json({ message: "Livre non trouvé" });

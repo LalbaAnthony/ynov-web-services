@@ -1,14 +1,14 @@
 let booksDB = require('../data/booksDB');
 
-function getAllBooks() {
+function getAll() {
     return booksDB;
 }
 
-function getBookById(id) {
+function getById(id) {
     return booksDB.find(book => book.id === id) || null;
 }
 
-function addBook(title, author) {
+function add(title, author) {
     const newBook = {
         id: booksDB.length ? booksDB[booksDB.length - 1].id + 1 : 1,
         title,
@@ -19,7 +19,7 @@ function addBook(title, author) {
     return newBook;
 }
 
-function updateBook(id, title, author) {
+function update(id, title, author) {
     const index = booksDB.findIndex(book => book.id === id);
     if (index === -1) return null;
 
@@ -28,7 +28,7 @@ function updateBook(id, title, author) {
     return updated;
 }
 
-function deleteBook(id) {
+function destroy(id) {
     const index = booksDB.findIndex(book => book.id === id);
     if (index === -1) return null;
 
@@ -37,9 +37,9 @@ function deleteBook(id) {
 }
 
 module.exports = {
-    getAllBooks,
-    getBookById,
-    addBook,
-    updateBook,
-    deleteBook,
+    getAll,
+    getById,
+    add,
+    update,
+    destroy,
 };
