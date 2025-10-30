@@ -3,6 +3,7 @@
 ## 🚀 - Quick start
 
 ```sh
+cd ynov-web-services
 npm i ; npm run dev
 ```
 
