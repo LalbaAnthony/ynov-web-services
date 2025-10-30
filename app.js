@@ -3,6 +3,8 @@ const swaggerUi = require('swagger-ui-express');
 const bookRoutes = require('./routes/bookRoutes');
 const dotenv = require('dotenv');
 const path = require('path');
+const helmet = require('helmet');
+const cors = require('cors');
 
 dotenv.config({ path: path.resolve(__dirname, '.env') });
 
@@ -10,6 +12,19 @@ const app = express();
 
 // Middleware pour lire le JSON
 app.use(express.json());
+
+// Sécuriser les en-têtes HTTP avec Helmet
+app.use(helmet.frameguard({ action: 'deny' }));
+
+// Configurer CORS
+// Create a JS array of the comma-separated origins from env variable
+const origin = process.env.APP_CORS_ALLOWED_ORIGINS ? process.env.APP_CORS_ALLOWED_ORIGINS.split(',').map(origin => origin.trim()) : [];
+app.use(cors({
+    origin: process.env.NODE_ENV === 'development' ? ['*'] : origin,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    optionsSuccessStatus: 204, // pour le preflight
+}));
 
 // Build des routes
 app.use(bookRoutes.prefix, bookRoutes.router); // as http://localhost:3000/api/v1/books

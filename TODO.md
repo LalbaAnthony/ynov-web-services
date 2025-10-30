@@ -3,5 +3,5 @@
 - [x] pagination
 - [x] HATEOAS
 - [x] dotenv
-- [ ] CORS
-- [ ] Helmet (anti XSS et framing)
+- [x] CORS
+- [x] Helmet (anti XSS et framing)

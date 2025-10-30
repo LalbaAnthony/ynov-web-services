@@ -12,6 +12,15 @@ cp .env.example .env
 npm i ; npm run dev
 ```
 
+## 🫡 - Usage
+
+Workings URLs:
+- GET `http://localhost:3000/api/v1/books`
+- POST `http://localhost:3000/api/v1/books` (requires JWT token with write access)
+- GET `http://localhost:3000/api/v1/books/:id`
+- PUT `http://localhost:3000/api/v1/books/:id` (requires JWT token with write access)
+- DELETE `http://localhost:3000/api/v1/books/:id` (requires JWT token with write access)
+
 ## 📚 - Documentation
 
 Generate a JWT token for testing:
