@@ -11,7 +11,7 @@ const SPANS = {
 const limiter = (max, span = 'FIFTEEN_MINUTES') => rateLimit({
     windowMs: SPANS?.[span] || SPANS.FIFTEEN_MINUTES,
     max,
-    message: "<img src='https://media1.tenor.com/m/iOoe4V8Va6YAAAAC/well-yes-but-actually-no-meme.gif' />",
+    message: "<img src='https://media1.tenor.com/m/002yhC8NXy8AAAAC/balthazar-kaamelot.gif' />",
 });
 
 module.exports = limiter;

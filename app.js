@@ -1,6 +1,10 @@
 const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const bookRoutes = require('./routes/bookRoutes');
+const dotenv = require('dotenv');
+const path = require('path');
+
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 const app = express();
 
@@ -14,8 +18,8 @@ app.use(bookRoutes.prefix, bookRoutes.router); // as http://localhost:3000/api/v
 function mergeSwaggers(modules) {
     const merged = {
         openapi: '3.0.1',
-        info: { title: 'Mon API', version: '1.0.0' },
-        servers: [{ url: 'http://localhost:3000' }],
+        info: { title: process.env.APP_NAME, version: '1.0.0' },
+        servers: [{ url: `http://localhost:${process.env.APP_PORT}` }],
         paths: {},
         components: { schemas: {} }
     };
@@ -42,11 +46,12 @@ function mergeSwaggers(modules) {
 const apiSpec = mergeSwaggers([bookRoutes /* , other route modules here */]);
 
 // Mount swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiSpec));
+app.use(process.env.APP_SWAGGER_URL, swaggerUi.serve, swaggerUi.setup(apiSpec));
 
 // Handle unhandled routes
 app.use((req, res, next) => {
-    res.status(404).json({ message: 'Route not found' });
+    res.status(404).send('<h1>404 - Not Found</h1><img src="https://media1.tenor.com/m/4kNeXAOr2TMAAAAC/kaamelott-arthur.gif" alt="Not Found"/>');
 })
+
 
 module.exports = app;

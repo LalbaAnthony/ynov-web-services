@@ -4,6 +4,11 @@
 
 ```sh
 cd ynov-web-services
+
+# Copy dotenv file
+cp .env.example .env
+
+# Install dependencies and start the development server
 npm i ; npm run dev
 ```
 
