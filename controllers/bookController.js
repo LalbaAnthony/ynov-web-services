@@ -1,7 +1,12 @@
 const BookProxy = require('../proxies/bookProxy');
 
 function getAllBooks(req, res) {
-    const books = BookProxy.getAll();
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    const params = { page, limit };
+
+    const books = BookProxy.getAll(params);
     res.json(books);
 }
 

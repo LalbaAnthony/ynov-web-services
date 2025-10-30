@@ -1,7 +1,20 @@
 let booksDB = require('../data/booksDB');
 
-function getAll() {
-    return booksDB;
+const DEFAULT_REQUEST_LIMIT = 10;
+const MAX_REQUEST_LIMIT = 50;
+
+function getAll(params = { page: 1, limit: DEFAULT_REQUEST_LIMIT }) {
+    const { page, limit } = params;
+
+    // Validators
+    if (!page || isNaN(page) || page < 1) page = 1;
+    if (!limit || isNaN(limit) || limit < 1) limit = DEFAULT_REQUEST_LIMIT;
+    if (limit > MAX_REQUEST_LIMIT) limit = MAX_REQUEST_LIMIT;
+
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    return booksDB.slice(startIndex, endIndex);
 }
 
 function getById(id) {
