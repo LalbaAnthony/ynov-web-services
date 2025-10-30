@@ -2,4 +2,6 @@
 - [x] versionning
 - [x] pagination
 - [x] HATEOAS
-- [ ] dotenv
+- [x] dotenv
+- [ ] CORS
+- [ ] Helmet (anti XSS et framing)
