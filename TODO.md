@@ -1,3 +1,4 @@
 - [x] Réaliser un middleware express qui va vérifier un token (JWT) afin de limiter un accès aux routes. Le nom de la fonciton est "requireWriteAccess" et doit retourner un code 401 si l'utilisateur n'a pas l'accès (auth failed).
-- [ ] versionning
+- [x] versionning
 - [ ] pagination
+- [ ] HATEOAS
