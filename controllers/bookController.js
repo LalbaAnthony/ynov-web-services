@@ -1,3 +1,4 @@
+const { attachLinks } = require('../hateoasHelper');
 const BookProxy = require('../proxies/bookProxy');
 
 function getAllBooks(req, res) {
@@ -7,7 +8,9 @@ function getAllBooks(req, res) {
     const params = { page, limit };
 
     const books = BookProxy.getAll(params);
-    res.json(books);
+    const enricheds = attachLinks('books', books, req.baseUrl, 1);
+    
+    res.json(enricheds);
 }
 
 function getBookById(req, res) {
@@ -18,7 +21,9 @@ function getBookById(req, res) {
         return res.status(404).json({ message: "Livre non trouvé" });
     }
 
-    res.json(book);
+    const enriched = attachLinks('books', book, req.baseUrl, 1);
+
+    res.json(enriched);
 }
 
 function addBook(req, res) {
@@ -29,7 +34,10 @@ function addBook(req, res) {
     }
 
     const newBook = BookProxy.add(title, author);
-    res.status(201).json(newBook);
+    
+    const enriched = attachLinks('books', newBook, req.baseUrl, 1);
+
+    res.status(201).json(enriched);
 }
 
 function updateBook(req, res) {
@@ -46,7 +54,9 @@ function updateBook(req, res) {
         return res.status(404).json({ message: "Livre non trouvé" });
     }
 
-    res.json(updated);
+    const enriched = attachLinks('books', updated, req.baseUrl, 1);
+
+    res.json(enriched);
 }
 
 function deleteBook(req, res) {
